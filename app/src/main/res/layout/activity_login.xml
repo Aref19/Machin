@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email"
+            android:id="@+id/emailfromlog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
@@ -61,7 +61,7 @@
             />
 
         <com.tuann.floatingactionbuttonexpandable.FloatingActionButtonExpandable
-            android:id="@+id/anmelden"
+            android:id="@+id/anmeldenlog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -72,7 +72,20 @@
             app:fab_bg_color="#1E81B3"
 
             />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
+    <TextView
+        android:id="@+id/passforget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password Forgget"
+        android:textColor="@color/colorAccent"
+        />
+
+</LinearLayout>
     </LinearLayout>
 
 

@@ -2,7 +2,7 @@ package com.example.mechanic.Interfacess
 
 interface FirebaseAcount {
     fun login()
-    fun rgeistieren()
+    fun rgeistieren(status:Boolean)
 
 
 

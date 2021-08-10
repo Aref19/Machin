@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">mechanic</string>
+    <string name="suc">sucsessful</string>
+    <string name="er">Eror your Password should be at least 6 characters</string>
 </resources>

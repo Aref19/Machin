@@ -32,7 +32,7 @@ class Login : AppCompatActivity(), FirebaseAcount {
         } else
             fab1.isClickable=true
             fab1.setOnClickListener {
-                Toast.makeText(this, "check your input", Toast.LENGTH_LONG).show()
+
                 if (!emai!!.editText?.text.toString()
                         .equals("") && !pass!!.editText?.text.toString().equals("")
                 ) {
@@ -59,12 +59,12 @@ class Login : AppCompatActivity(), FirebaseAcount {
     override fun login() {
 
         firba!!.signInWithEmailAndPassword(
-            emai!!.editText?.text.toString(),
+            emai!!.editText?.text.toString().trim(),
             pass!!.editText?.text.toString()
         ).addOnCompleteListener { it ->
 
             if (it.isSuccessful) {
-                Log.i("sta", "onCreate: " + "sucsess2")
+             startActivity(Intent(application,CentralActivty::class.java))
             } else
                 Toast.makeText(this, "check your input", Toast.LENGTH_LONG).show()
 

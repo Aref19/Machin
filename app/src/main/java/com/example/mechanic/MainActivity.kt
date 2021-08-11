@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import com.example.mechanic.saveData.MangeCache
+import com.example.mechanic.ui.CentralActivty
 import com.example.mechanic.ui.Login
 import com.example.mechanic.ui.Registeren
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity()  {
         setContentView(R.layout.activity_main)
           fire= FirebaseAuth.getInstance()
 
-        Log.i("aref", "onCreate: "+"dasdsa")
+
 
           GlobalScope.launch(Dispatchers.Default) {
 
@@ -37,13 +39,15 @@ class MainActivity : AppCompatActivity()  {
 
 }
     suspend fun longForImage(){
-        delay( 3000L)
-        if(fire!!.uid==null){
-            Log.i("aref", "onCreate: "+"dasds2a")
-            startActivity(Intent(this,Registeren::class.java))
-        }else
-            startActivity(Intent(this,Login::class.java))
-        Log.i("aref", "onCreate: "+"dasds3a")
+        delay( 1000L)
+     if(MangeCache(this).checkIfRegisterd()){
+         startActivity(Intent(this,CentralActivty::class.java))
+         this.finish()
+         Log.i("aref", "onCreate: "+"dasds3a")
+     }else
+         startActivity(Intent(this,Login::class.java))
+
+
     }
 
 

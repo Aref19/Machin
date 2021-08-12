@@ -9,6 +9,7 @@ import com.squareup.picasso.Picasso
 import  com.squareup.picasso.Target
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import kotlinx.coroutines.delay
 import java.lang.Exception
 
 class ImageLoadViewModel :ViewModel {
@@ -19,6 +20,7 @@ class ImageLoadViewModel :ViewModel {
     }
 
   suspend  fun loadImage(url:String){
+      delay(1000)
 
         Picasso.get().load(url).into(object :Target{
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {

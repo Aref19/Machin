@@ -2,7 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/listofOrder"
-        android:title="Home"
+        android:title="Image"
+        android:icon="@drawable/ic_baseline_image_24"
 
         >
 
@@ -10,11 +11,8 @@
     </item>
     <item
         android:id="@+id/listofnumber"
-        android:title="Phon"
-        android:icon="@drawable/ic_baseline_contact_phone_24"
-
-        >
-
+        android:title="Text"
+        android:icon="@drawable/ic_baseline_picture_as_pdf_24">
 
     </item>
 

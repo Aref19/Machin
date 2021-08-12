@@ -7,13 +7,22 @@
     tools:context=".ui.CentralActivty">
 
 
-    <Toolbar
+
+
+
+    <FrameLayout
+        android:id="@+id/fram"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/colorAccent"
-      >
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navibut"
+        />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navibut"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-    </Toolbar>
+        app:menu="@menu/menubottomnaiagtion" />
 
 </RelativeLayout>

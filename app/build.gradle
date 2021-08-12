@@ -50,7 +50,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.github.imtuann:FloatingActionButtonExpandable:1.1.2'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
-
+    //to crop
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     def lifecycle_version = "2.4.0-alpha03"
 

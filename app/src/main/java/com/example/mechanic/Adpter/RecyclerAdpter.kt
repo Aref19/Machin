@@ -1,5 +1,7 @@
 package com.example.mechanic.Adpter
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,8 +36,8 @@ class RecyclerAdpter(arrayofImages: ArrayList<Item>) :
 
     override fun onBindViewHolder(holder: RecyclerAdpter.holder, position: Int) {
         holder.text!!.text=arrayofImages[position].id
-
-        //holder.image1!!.setImageBitmap(arrayofImages[position].bitmap)
+        var bitmap=BitmapFactory.decodeFile(arrayofImages[position].file)
+        holder.image1!!.setImageBitmap(bitmap)
 
     }
 

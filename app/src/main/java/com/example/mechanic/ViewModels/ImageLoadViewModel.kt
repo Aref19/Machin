@@ -29,35 +29,13 @@ class ImageLoadViewModel : ViewModel {
     var image: ImageInterface? = null
     var live:LiveData<List<Item>>?=null
 
-    constructor(image: ImageInterface, application: Application) {
-        this.image = image
+    constructor(application: Application) {
         dao = DataBase.getDatabase(application).dao()
-         dao!!.delete()
+//         dao!!.delete()
         live=dao!!.getAll()
     }
 
-    suspend fun loadImage(url: String) {
-        delay(1000)
 
-        Picasso.get().load(url).into(object : Target {
-            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-
-                image!!.lodedImage(bitmap)
-            }
-
-            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-
-            }
-
-            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-
-            }
-
-
-        })
-
-
-    }
     fun insertimage(item: Item){
         GlobalScope.launch(Dispatchers.Main){
             Log.i("item", "insertimage: " + item.id)
@@ -71,6 +49,7 @@ class ImageLoadViewModel : ViewModel {
     fun saveImagesinFile(bitmap: Bitmap,imagename:String){
         // creat file
         val direct = File(Environment.getExternalStorageDirectory().toString() + "/Foliate")//true
+
         Log.i("path", "saveImagesinFile: "+Environment.getExternalStorageDirectory().toString())
         // if file erlady here
         if (!direct.exists()) { //false

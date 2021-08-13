@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -24,23 +25,26 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.math.log
 
 
 class CentralActivty : AppCompatActivity(), ImageInterface {
     var image: ImageView? = null
     var viewmodel: ImageLoadViewModel? = null
     var fabbutton: FloatingActionButton? = null
-    var rescler:RecyclerView?=null
-    var rescler2:RecyclerView?=null
-    var items= ArrayList<Item>()
-    val fragmentManager=supportFragmentManager.beginTransaction()
+    var rescler: RecyclerView? = null
+    var rescler2: RecyclerView? = null
+    var items = ArrayList<Item>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_central_activty)
         fabbutton = findViewById(R.id.floating_action_button)
-        viewmodel = ImageLoadViewModel(this,application)
-         rescler=findViewById(R.id.order_1)
-        rescler2=findViewById(R.id.images_2)
+        viewmodel = ImageLoadViewModel(application)
+        rescler = findViewById(R.id.order_1)
+        rescler2 = findViewById(R.id.images_2)
 
         ActivityCompat.requestPermissions(
             this, arrayOf(
@@ -57,25 +61,21 @@ class CentralActivty : AppCompatActivity(), ImageInterface {
                 .start(this)
 
 
-
-
-
         }
-  /*
+
         viewmodel!!.live!!.observe(this, {
-            items.addAll(it)
+            if (it.size > 0) {
+                Log.i("file", "onCreate: " + it.get(0).file)
 
-            rescler!!.adapter = RecyclerAdpter(items!!)
-            rescler!!.layoutManager = LinearLayoutManager(applicationContext)
+                items.addAll(it)
+
+                rescler!!.adapter = RecyclerAdpter(items!!)
+                rescler!!.layoutManager = LinearLayoutManager(applicationContext)
+
+            }
+
+
         })
-
-   */
-
-
-
-
-
-
 
 
     }
@@ -86,27 +86,34 @@ class CentralActivty : AppCompatActivity(), ImageInterface {
             if (resultCode == RESULT_OK) {
 
                 GlobalScope.launch(Dispatchers.Main) {
-                    Upop().show(fragmentManager,null)
+                    var fragmentManager = supportFragmentManager.beginTransaction()
+                    Upop(this@CentralActivty, imageCorp.uri.toString()).show(fragmentManager, null)
 
-                    viewmodel!!.loadImage(imageCorp.uri.toString())
+
+                    // viewmodel!!.loadImage(imageCorp.uri.toString())
+
 
                 }
-
-
             }
+
+
+
+            super.onActivityResult(requestCode, resultCode, data)
+        }}
+
+
+        override fun lodedImage(bit: Bitmap?, name: String) {
+            Log.i("name", "lodedImage: " + Environment.getExternalStorageDirectory().toString())
+            viewmodel!!.saveImagesinFile(bit!!, name)
+            viewmodel!!.insertimage(
+                Item(
+                    name,
+                    Environment.getExternalStorageDirectory()
+                        .toString() + "/Foliate/" + name + ".jpg"
+                )
+            )
+
+
         }
-
-
-
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
-
-    override fun lodedImage(bit: Bitmap?) {
-
-          viewmodel!!.insertimage(Item("erste",Upop().getnameFromuser()))
-          viewmodel!!.saveImagesinFile(bit!!,Upop().getnameFromuser())
-    }
-
-
-}

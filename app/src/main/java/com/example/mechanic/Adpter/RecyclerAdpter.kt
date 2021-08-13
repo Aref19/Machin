@@ -8,9 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanic.R
 import com.example.mechanic.model.Image
+import com.example.mechanic.saveData.room.Item
 
 
-class RecyclerAdpter(arrayofImages: ArrayList<Image>) :
+class RecyclerAdpter(arrayofImages: ArrayList<Item>) :
 
     RecyclerView.Adapter<RecyclerAdpter.holder>() {
 
@@ -32,9 +33,9 @@ class RecyclerAdpter(arrayofImages: ArrayList<Image>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerAdpter.holder, position: Int) {
-        holder.text!!.text=arrayofImages[position].name
+        holder.text!!.text=arrayofImages[position].id
 
-        holder.image1!!.setImageResource(R.drawable.mechanic)
+        //holder.image1!!.setImageBitmap(arrayofImages[position].bitmap)
 
     }
 

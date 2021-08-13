@@ -5,28 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.CentralActivty">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_1"
-        android:layout_above="@+id/navibut"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navibut"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/order_1"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/images_2"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/navibut" />
+    </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-     android:layout_above="@+id/navibut"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navibut">
 
-    <!-- Main content -->
+        <!-- Main content -->
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_baseline_camera_enhance_24"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/ic_baseline_camera_enhance_24" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
     <FrameLayout
@@ -42,10 +57,10 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navibut"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-          android:background="@color/bottomnavigation"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bottomnavigation"
         app:menu="@menu/menubottomnaiagtion" />
 
 

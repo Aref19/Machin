@@ -46,16 +46,16 @@ class Upop : DialogFragment, View.OnClickListener {
 
     override fun onClick(p0: View?) {
 
-        name=text!!.text.toString()
+        name=text!!.text.toString().trim()
        getnameFromuser()
-        GlobalScope.launch(Dispatchers.Main) {
+
             loadImage( url )
-        }
+
 
         this.dismiss()
     }
-    suspend fun loadImage(url: String?) {
-        delay(1000)
+ fun loadImage(url: String?) {
+
 
         Picasso.get().load(url).into(object : Target {
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {

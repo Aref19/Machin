@@ -2,10 +2,10 @@ package com.example.mechanic.saveData.room
 
 import android.content.Context
 import androidx.room.*
-@Database(entities = arrayOf(Item::class
+@Database(entities =  arrayOf(Item::class
 ),version = 1)
 
-@TypeConverters(ConvaertImage::class)
+
 abstract class DataBase : RoomDatabase() {
 
     abstract fun dao(): DaoItemsImages

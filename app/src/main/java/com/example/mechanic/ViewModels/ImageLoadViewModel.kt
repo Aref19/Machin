@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.os.Environment
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mechanic.Interfacess.ImageInterface
 import com.example.mechanic.model.Image
@@ -27,13 +28,18 @@ class ImageLoadViewModel : ViewModel {
 
     var imagemodel:Image?=null
     var image: ImageInterface? = null
-    var live:LiveData<List<Item>>?=null
+    var live: LiveData<List<Item>>?= null
 
     constructor(application: Application) {
         dao = DataBase.getDatabase(application).dao()
 //         dao!!.delete()
+
         live=dao!!.getAll()
+        Log.i("live", "getallData: "+live)
+
+
     }
+
 
 
     fun insertimage(item: Item){
@@ -45,8 +51,11 @@ class ImageLoadViewModel : ViewModel {
         }
     }
 
+
+
     // das ist dahab ahmar
-    fun saveImagesinFile(bitmap: Bitmap,imagename:String){
+ fun saveImagesinFile(bitmap: Bitmap,imagename:String){
+
         // creat file
         val direct = File(Environment.getExternalStorageDirectory().toString() + "/Foliate")//true
 

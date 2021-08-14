@@ -6,5 +6,6 @@ import java.net.URI
 
 interface ImageInterface {
     fun lodedImage(bit:Bitmap?,name:String)
+    fun mkorder(nameorder:String)
 
 }

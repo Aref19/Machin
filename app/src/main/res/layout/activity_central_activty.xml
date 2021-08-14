@@ -10,11 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/navibut"
+        android:paddingTop="20dp"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/order_1"
             android:layout_weight="1"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/> >
 

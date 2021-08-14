@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mechanic.Adpter.RecxclerAdpterforOder
 import com.example.mechanic.Adpter.RecyclerAdpter
 import com.example.mechanic.Interfacess.ImageInterface
 import com.example.mechanic.R
@@ -36,8 +37,8 @@ class CentralActivty : AppCompatActivity(), ImageInterface {
     var fabbutton: FloatingActionButton? = null
     var rescler: RecyclerView? = null
     var rescler2: RecyclerView? = null
-    var items = ArrayList<Item>()
-
+    var items_1 = ArrayList<Item>()
+     var itemorder=ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,10 +68,10 @@ class CentralActivty : AppCompatActivity(), ImageInterface {
         }
         viewmodel!!.live?.observe(this, {
 
-            items.clear()
-            items.addAll(it)
+            items_1.clear()
+            items_1.addAll(it)
 
-            rescler2!!.adapter = RecyclerAdpter(items!!)
+            rescler2!!.adapter = RecyclerAdpter(items_1!!)
 
             rescler2!!.layoutManager = LinearLayoutManager(applicationContext)
 
@@ -118,6 +119,15 @@ class CentralActivty : AppCompatActivity(), ImageInterface {
 
     }
 
+    override fun mkorder(nameorder: String) {
+
+        Log.i("nameordr", "mkorder: "+nameorder)
+        itemorder .add(nameorder)
+        rescler!!.adapter = RecxclerAdpterforOder(itemorder!!)
+
+        rescler!!.layoutManager = LinearLayoutManager(applicationContext)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = menuInflater
         inflater.inflate(R.menu.addneworder, menu)
@@ -127,7 +137,10 @@ class CentralActivty : AppCompatActivity(), ImageInterface {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
           R.id.addnewitem  ->{
+              Log.i("menu", "onOptionsItemSelected: "+"das")
 
+              var fragmentManager = supportFragmentManager.beginTransaction()
+              Upop(this).show(fragmentManager, null)
 
 
             }

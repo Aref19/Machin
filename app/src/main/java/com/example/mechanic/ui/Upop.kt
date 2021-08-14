@@ -22,14 +22,19 @@ import kotlinx.coroutines.launch
 class Upop : DialogFragment, View.OnClickListener {
     var vie: View? = null
     var button: Button? = null
-    var text:EditText?=null
-    var name:String?=null
-    var url:String?=null
+    var text: EditText? = null
+    var name: String? = null
+    var url: String? = null
+    var nameforder: String? = ""
     var image: ImageInterface? = null
 
-    constructor(image: ImageInterface,url:String ) {
-      this.image=image
-       this. url=url
+    constructor(image: ImageInterface, url: String) {
+        this.image = image
+        this.url = url
+    }
+
+    constructor(image: ImageInterface) {
+        this.image = image
     }
 
     override fun onCreateView(
@@ -39,28 +44,33 @@ class Upop : DialogFragment, View.OnClickListener {
     ): View? {
         vie = inflater.inflate(R.layout.upop, container, false)
         button = vie!!.findViewById(R.id.nameselect)
-        text= vie!!.findViewById(R.id.nameimgafile)
+        text = vie!!.findViewById(R.id.nameimgafile)
         button!!.setOnClickListener(this)
         return vie
     }
 
     override fun onClick(p0: View?) {
 
-        name=text!!.text.toString().trim()
-       getnameFromuser()
+        name = text!!.text.toString().trim()
+        nameforder = text!!.text.toString().trim()
+        if (!nameforder.equals("")) {
+            image!!.mkorder(nameforder!!)
+        }
+        getnameFromuser()
 
-            loadImage( url )
+        loadImage(url)
 
 
         this.dismiss()
     }
- fun loadImage(url: String?) {
+
+    fun loadImage(url: String?) {
 
 
         Picasso.get().load(url).into(object : Target {
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
 
-                image!!.lodedImage(bitmap,getnameFromuser())
+                image!!.lodedImage(bitmap, getnameFromuser())
             }
 
             override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
@@ -77,8 +87,8 @@ class Upop : DialogFragment, View.OnClickListener {
 
     }
 
-     fun getnameFromuser():String =
-       name!!
+    fun getnameFromuser(): String =
+        name!!
 
 
 }

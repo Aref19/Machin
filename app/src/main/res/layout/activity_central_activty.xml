@@ -10,29 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/navibut"
-        android:paddingTop="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/order_1"
-            android:layout_weight="1"
+
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/> >
+            android:layout_height="wrap_content" />
+        >
 
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="?android:attr/listDivider" />
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="?android:attr/listDivider" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/images_2"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/navibut" />
+            android:layout_above="@+id/navibut"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

@@ -27,14 +27,17 @@ class Upop : DialogFragment, View.OnClickListener {
     var url: String? = null
     var nameforder: String? = ""
     var image: ImageInterface? = null
+    var accses: Boolean? = null
 
-    constructor(image: ImageInterface, url: String) {
+    constructor(image: ImageInterface, url: String,accsess:Boolean) {
         this.image = image
         this.url = url
+        this.accses=accsess
     }
 
-    constructor(image: ImageInterface) {
+    constructor(image: ImageInterface,accsess:Boolean) {
         this.image = image
+        this.accses=accsess
     }
 
     override fun onCreateView(
@@ -50,15 +53,23 @@ class Upop : DialogFragment, View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
+        if(accses!!){
+            name = text!!.text.toString().trim()
+            getnameFromuser()
+            loadImage(url)
+        }else{
+            nameforder = text!!.text.toString().trim()
 
-        name = text!!.text.toString().trim()
-        nameforder = text!!.text.toString().trim()
-        if (!nameforder.equals("")) {
-            image!!.mkorder(nameforder!!)
+            if (!nameforder.equals("")) {
+                image!!.mkorder(nameforder!!)
+            }
         }
-        getnameFromuser()
 
-        loadImage(url)
+
+
+
+
+
 
 
         this.dismiss()

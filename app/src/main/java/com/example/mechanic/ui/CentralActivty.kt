@@ -12,6 +12,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
@@ -88,7 +89,7 @@ class CentralActivty : AppCompatActivity(), ImageInterface {
 
                 GlobalScope.launch(Dispatchers.Main) {
                     var fragmentManager = supportFragmentManager.beginTransaction()
-                    Upop(this@CentralActivty, imageCorp.uri.toString()).show(fragmentManager, null)
+                    Upop(this@CentralActivty, imageCorp.uri.toString(),true).show(fragmentManager, null)
 
 
                     // viewmodel!!.loadImage(imageCorp.uri.toString())
@@ -135,16 +136,23 @@ class CentralActivty : AppCompatActivity(), ImageInterface {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-          R.id.addnewitem  ->{
-              Log.i("menu", "onOptionsItemSelected: "+"das")
+        if(itemorder.size>=2){
+            var alert=AlertDialog.Builder(this)
+                .setTitle("Ops")
+                .setMessage("you can not creat more as Tow Folder").show()
+        }else{
+            when(item.itemId){
+                R.id.addnewitem  ->{
+                    Log.i("menu", "onOptionsItemSelected: "+"das")
 
-              var fragmentManager = supportFragmentManager.beginTransaction()
-              Upop(this).show(fragmentManager, null)
+                    var fragmentManager = supportFragmentManager.beginTransaction()
+                    Upop(this,false).show(fragmentManager, null)
 
 
+                }
             }
         }
+
         return super.onOptionsItemSelected(item)
     }
 }

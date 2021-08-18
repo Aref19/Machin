@@ -82,6 +82,10 @@ class ImageLoadViewModel : ViewModel {
 
 
     }
+    fun itemFromDataBase(id:String):Item{
+
+        return dao!!.selectitem(id)
+    }
 
 
 }

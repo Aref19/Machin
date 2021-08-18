@@ -189,9 +189,8 @@ class CentralActivty : AppCompatActivity(), ImageInterface, RcyclerPosition ,Pop
 
     override fun getPostionSelected(vew: View) {
 
-        if(vew.id==R.id.pup){
             greatPop(vew)
-        }
+
     }
     fun greatPop(v: View){
         var pop = PopupMenu(this, v)

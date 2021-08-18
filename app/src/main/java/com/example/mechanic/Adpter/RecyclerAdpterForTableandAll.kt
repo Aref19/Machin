@@ -28,6 +28,7 @@ class RecyclerAdpterForTableandAll(arraylistofimages: ArrayList<Item>,recyclerpo
         var recyclerpo= recyclerpo
         init {
             v.setOnClickListener { v->
+
                   recyclerpo.getPostionSelected((adapterPosition+1),"3")
 
             }

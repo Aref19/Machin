@@ -25,32 +25,36 @@ import kotlinx.coroutines.runBlocking
 import java.io.File
 
 
-class RecyclerAdpter(arrayofImages: ArrayList<Item>,rcyclerPosition: RcyclerPosition) :
+class RecyclerAdpter(arrayofImages: ArrayList<Item>, rcyclerPosition: RcyclerPosition) :
 
-    RecyclerView.Adapter<RecyclerAdpter.holder>() {
-    var rcyclerPosition =rcyclerPosition
+    RecyclerView.Adapter<RecyclerAdpter.holder>(), View.OnClickListener {
+    var rcyclerPosition = rcyclerPosition
     var arrayofImages = arrayofImages
 
-    class holder(item: View,rcyclerPosition: RcyclerPosition) : RecyclerView.ViewHolder(item) {
+    class holder(item: View, rcyclerPosition: RcyclerPosition) : RecyclerView.ViewHolder(item),
+        View.OnClickListener {
         var image1: ImageView? = null
         var text: TextView? = null
-        var rcyclerPosition=rcyclerPosition
+        var rcyclerPosition = rcyclerPosition
 
         init {
             image1 = item.findViewById(R.id.imageitem)
             text = item.findViewById(R.id.nameitem)
-            var text1=item.findViewById<TextView>(R.id.pup)
+            var text1 = item.findViewById<TextView>(R.id.pup)
 
-            item.setOnClickListener { v->
-                Log.i("idfrom", ": "+(item.id==text1.id)+"v :"+v.id+"tex1 :"+text1.id)
-                if(v.id==R.id.pup){
-                    rcyclerPosition.getPostionSelected(v)
-                    Log.i("id1", ": "+v.id)
-                }else if (v.id==text!!.id){
-                    rcyclerPosition.getPostionSelected((adapterPosition),"1")
-                }
+            text!!.setOnClickListener(this)
+            text1!!.setOnClickListener(this)
 
+        }
 
+        override fun onClick(p0: View?) {
+
+            if (p0!!.id == R.id.pup) {
+
+                rcyclerPosition.getPostionSelected(p0)
+                Log.i("id1", ": " + p0.id)
+            } else if (p0!!.id == text!!.id) {
+                rcyclerPosition.getPostionSelected((adapterPosition), "1")
             }
         }
     }
@@ -58,14 +62,15 @@ class RecyclerAdpter(arrayofImages: ArrayList<Item>,rcyclerPosition: RcyclerPosi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): holder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.itemrecycler1, parent, false)
-        return holder(view,rcyclerPosition)
+        return holder(view, rcyclerPosition)
     }
 
     override fun onBindViewHolder(holder: RecyclerAdpter.holder, position: Int) {
         holder.text!!.text = arrayofImages[position].id
-         var bitmap:Bitmap?=null
+        var bitmap: Bitmap? = null
 
-        Picasso.get().load(File(arrayofImages[position].file)).transform(RoundedCornersTransformation(10,10)).centerCrop()
+        Picasso.get().load(File(arrayofImages[position].file))
+            .transform(RoundedCornersTransformation(10, 10)).centerCrop()
             .resize(250, 150).into(holder.image1)
         //holder.image1!!.setImageDrawable( Drawable.createFromPath(arrayofImages[position].file))
         /*
@@ -96,7 +101,7 @@ class RecyclerAdpter(arrayofImages: ArrayList<Item>,rcyclerPosition: RcyclerPosi
 
         //bitmap = BitmapFactory.decodeFile(arrayofImages[position].file)
 
-                //showPictures(holder, bitmap)
+        //showPictures(holder, bitmap)
 
 
     }
@@ -105,6 +110,10 @@ class RecyclerAdpter(arrayofImages: ArrayList<Item>,rcyclerPosition: RcyclerPosi
         return arrayofImages.size
     }
 
+    override fun onClick(p0: View?) {
+        Log.i("idClic", "onClick: " + p0!!.id + "")
+        rcyclerPosition.getPostionSelected(p0!!)
+    }
 
 
 }

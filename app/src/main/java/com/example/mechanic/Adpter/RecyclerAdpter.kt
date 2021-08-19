@@ -68,7 +68,7 @@ class RecyclerAdpter(arrayofImages: ArrayList<Item>, rcyclerPosition: RcyclerPos
     override fun onBindViewHolder(holder: RecyclerAdpter.holder, position: Int) {
         holder.text!!.text = arrayofImages[position].id
         var bitmap: Bitmap? = null
-
+        Log.i("sols", "onBindViewHolder: "+arrayofImages[position].file)
         Picasso.get().load(File(arrayofImages[position].file))
             .transform(RoundedCornersTransformation(10, 10)).centerCrop()
             .resize(250, 150).into(holder.image1)

@@ -30,9 +30,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.coroutines.*
+import kotlin.math.log
 
 
-class CentralActivty : AppCompatActivity(), ImageInterface, RcyclerPosition ,PopupMenu.OnMenuItemClickListener{
+class CentralActivty : AppCompatActivity(), ImageInterface, RcyclerPosition,
+    PopupMenu.OnMenuItemClickListener {
     var image: ImageView? = null
     var viewmodel: ImageLoadViewModel? = null
     var fabbutton: FloatingActionButton? = null
@@ -68,13 +70,26 @@ class CentralActivty : AppCompatActivity(), ImageInterface, RcyclerPosition ,Pop
 
         }
         viewmodel!!.live?.observe(this, {
-
             items_1.clear()
-            items_1.addAll(it)
+            itemorder.clear()
+            for (s in it) {
+                Log.i("why", "onCreate: "+s.id)
+                if (s.id.contains("Folder_")) {
 
-            rescler2!!.adapter = RecyclerAdpter(items_1!!, this)
+                    mkorder(s.file)
+                    Log.i("why1", "onCreate: "+s.id)
+                } else {
+                    Log.i("why", "onCreate: "+s.id)
 
-            rescler2!!.layoutManager = LinearLayoutManager(applicationContext)
+                    items_1.add(s)
+                    Log.i("dsa", "onCreate: " + s)
+
+                    rescler2!!.adapter = RecyclerAdpter(items_1!!, this)
+
+                    rescler2!!.layoutManager = LinearLayoutManager(applicationContext)
+                    Log.i("voran", "mkorder: "+viewmodel!!.checkif("Pc"))
+                }
+            }
 
 
         })
@@ -126,10 +141,17 @@ class CentralActivty : AppCompatActivity(), ImageInterface, RcyclerPosition ,Pop
     override fun mkorder(nameorder: String) {
 
         Log.i("nameordr", "mkorder: " + nameorder)
+
         itemorder.add(nameorder)
         rescler!!.adapter = RecxclerAdpterforOder(itemorder!!, this)
-
         rescler!!.layoutManager = LinearLayoutManager(applicationContext)
+
+        if(!viewmodel!!.checkif("Folder_$nameorder"))
+            viewmodel!!.insertimage(Item("Folder_$nameorder", nameorder))
+
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -161,11 +183,23 @@ class CentralActivty : AppCompatActivity(), ImageInterface, RcyclerPosition ,Pop
 
 
     override fun getPostionSelected(po: Int, from: String) {
-        var bundle=Bundle()
+        var bundle = Bundle()
 
         if (from == "1") {
             Toast.makeText(this, items_1!!.get(po).id.toString(), Toast.LENGTH_LONG).show()
             bundle.putString("nameofitem", items_1!!.get(po).id)
+
+            startActivity(
+                Intent(
+                    this, ImagesShowerActivity::class.java
+
+
+                ).putExtras(bundle)
+            )
+        } else if (from == "2") {
+            Toast.makeText(this, itemorder!!.get(po).toString(), Toast.LENGTH_LONG).show()
+            bundle.putString("nameofitem", items_1!!.get(po).id)
+
             startActivity(
                 Intent(
                     this, PictareOfFolder::class.java
@@ -173,26 +207,16 @@ class CentralActivty : AppCompatActivity(), ImageInterface, RcyclerPosition ,Pop
 
                 ).putExtras(bundle)
             )
-        } else if (from == "2") {
-            Toast.makeText(this, itemorder!!.get(po).toString(), Toast.LENGTH_LONG).show()
-
-            bundle.putString("nameofitem", itemorder!!.get(po))
-           startActivity(
-               Intent(
-                   this, PictareOfFolder::class.java
-
-
-               ).putExtras(bundle)
-           )
         }
     }
 
     override fun getPostionSelected(vew: View) {
 
-            greatPop(vew)
+        greatPop(vew)
 
     }
-    fun greatPop(v: View){
+
+    fun greatPop(v: View) {
         var pop = PopupMenu(this, v)
         pop.inflate(R.menu.itemtopdf)
         pop.setOnMenuItemClickListener(this)

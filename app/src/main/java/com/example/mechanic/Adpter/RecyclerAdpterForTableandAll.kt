@@ -17,19 +17,23 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.tabeladpter.view.*
 import java.io.File
 
-class RecyclerAdpterForTableandAll(arraylistofimages: ArrayList<Item>,recyclerpo: RcyclerPosition) :
+class RecyclerAdpterForTableandAll(
+    arraylistofimages: ArrayList<Item>,
+    recyclerpo: RcyclerPosition
+) :
     RecyclerView.Adapter<RecyclerAdpterForTableandAll.holder>() {
-    var recyclerpo= recyclerpo
-    var arraylistofimages=arraylistofimages
+    var recyclerpo = recyclerpo
+    var arraylistofimages = arraylistofimages
 
-    class holder(v: View,recyclerpo: RcyclerPosition) : RecyclerView.ViewHolder(v) {
+    class holder(v: View, recyclerpo: RcyclerPosition) : RecyclerView.ViewHolder(v) {
         var imageView = v.findViewById<ImageView>(R.id.imageView1)
         var imageView1 = v.findViewById<ImageView>(R.id.imageView1)
-        var recyclerpo= recyclerpo
-        init {
-            v.setOnClickListener { v->
+        var recyclerpo = recyclerpo
 
-                  recyclerpo.getPostionSelected((adapterPosition+1),"3")
+        init {
+            v.setOnClickListener { v ->
+
+                recyclerpo.getPostionSelected((adapterPosition + 1), "3")
 
             }
         }
@@ -39,30 +43,30 @@ class RecyclerAdpterForTableandAll(arraylistofimages: ArrayList<Item>,recyclerpo
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): holder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.tabeladpter, parent, false)
-        return RecyclerAdpterForTableandAll.holder(view,recyclerpo)
+        return RecyclerAdpterForTableandAll.holder(view, recyclerpo)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: holder, position: Int) {
-        if(arraylistofimages.size>0){
+        if (arraylistofimages.size > 0) {
             Picasso.get().load(File(arraylistofimages[position].file)).transform(
-                RoundedCornersTransformation(10,10)
+                RoundedCornersTransformation(10, 10)
             ).centerCrop()
                 .resize(300, 300).into(holder.imageView)
 
-            if (arraylistofimages.size>=1){
-                Log.i("war", "onBindViewHolder: "+"war")
+            if (arraylistofimages.size >= 1) {
+                Log.i("war", "onBindViewHolder: " + "war")
 
                 Picasso.get().load(File(arraylistofimages[position].file)).transform(
-                    RoundedCornersTransformation(10,10)
+                    RoundedCornersTransformation(10, 10)
                 )
-                   .into(holder.imageView1)
+                    .into(holder.imageView1)
             }
         }
 
     }
 
     override fun getItemCount(): Int {
-      return arraylistofimages.size
+        return arraylistofimages.size
     }
 }

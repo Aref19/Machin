@@ -14,7 +14,7 @@ import com.example.mechanic.R
 import com.example.mechanic.ViewModels.ImageLoadViewModel
 import com.example.mechanic.saveData.room.Item
 
-class PictareOfFolder : AppCompatActivity(), RcyclerPosition {
+class PictareOfFolder : AppCompatActivity(), RcyclerPosition{
     var listofimages = ArrayList<Item>()
     var recyl: RecyclerView? = null
     var imageLoadViewModel: ImageLoadViewModel? = null
@@ -28,12 +28,7 @@ class PictareOfFolder : AppCompatActivity(), RcyclerPosition {
         var ad = RecyclerAdpterForTableandAll(listofimages, this)
 
         listofimages.clear()
-        listofimages.add(imageLoadViewModel!!.itemFromDataBase(getnameFromSelectedItem()))
-        listofimages.add(Item("dsa", " /storage/emulated/0/Foliate/Pc.jpg"))
-        Log.i(
-            "image2",
-            "onCreate: " + imageLoadViewModel!!.itemFromDataBase(getnameFromSelectedItem()).file
-        )
+
         recyl!!.adapter = ad
 
 
@@ -60,7 +55,9 @@ class PictareOfFolder : AppCompatActivity(), RcyclerPosition {
 
 
 
-    private fun getnameFromSelectedItem(): String {
+    private fun getnameFromSelectedItem(): String{
+
+
         return intent.extras!!.getString("nameofitem").toString()
 
 

@@ -18,4 +18,6 @@ interface DaoItemsImages {
     fun delete()
     @Query("select * from images where id = :id")
     fun  selectitem(id:String):Item
+    @Query("select 1 from images where id = :id")
+    fun  checkIfItem(id:String):Boolean
 }

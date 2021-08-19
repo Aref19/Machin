@@ -32,7 +32,7 @@ class ImageLoadViewModel : ViewModel {
 
     constructor(application: Application) {
         dao = DataBase.getDatabase(application).dao()
-//         dao!!.delete()
+   //  dao!!.delete()
 
         live=dao!!.getAll()
         Log.i("live", "getallData: "+live)
@@ -85,6 +85,10 @@ class ImageLoadViewModel : ViewModel {
     fun itemFromDataBase(id:String):Item{
 
         return dao!!.selectitem(id)
+    }
+    fun checkif(id:String):Boolean{
+
+        return dao!!.checkIfItem(id)
     }
 
 
